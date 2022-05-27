@@ -1,7 +1,10 @@
 let randomParagraph = 'https://api.quotable.io/random?minLength=200',
+    maxTime = 60,
+    barWidth = 0,
+    timerBar = document.querySelector('.timer-bar'),
     pContainer = document.querySelector('.paragraph-container'),
     input = document.querySelector('.input')
-
+    
 showNewParagraph();
 body.onclick = () => input.focus();
 
@@ -25,3 +28,15 @@ async function showNewParagraph() {
       pContainer.appendChild(wordContainer);
    })
 }
+
+function timerBarFn(){
+   let widthIncrement = 100 / maxTime;
+   function updateBarWidth() {
+      timerBar.style.width = `${barWidth}%`;
+      barWidth += widthIncrement;
+      barWidth > 101 ? clearInterval(timerBarFn) : 0;
+   }
+   updateBarWidth()
+   let timerBarFn = setInterval(updateBarWidth, 1000);
+}
+timerBarFn()
