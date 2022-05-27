@@ -221,3 +221,113 @@ li:not(:last-of-type)::after {
    width: 105%;
    border-radius: 3px
 }
+.result-container {
+   position: fixed;
+   z-index: 0;
+   width: 100%;
+   height: 100%;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   background-color: rgba(0, 0, 0, 0.3);
+   opacity: 0;
+   transition-duration: 0.6s
+}
+.result-container header {
+   display: flex;
+   align-items: center;
+   gap: 25px;
+   background-color: #2b5466;
+   color: white;
+   width: 350px;
+   max-width: 80%;
+   padding: 9px 15px;
+   border-radius: 4px 4px 0 0
+}
+.result-container header span {
+   cursor: pointer
+}
+.result-container header span:hover {
+   text-decoration: underline
+}
+.result {
+   width: 350px;
+   max-width: 80%;
+   height: 380px;
+   background-color: #fff;
+   padding: 20px 20px 0;
+   border: 1px solid gray;
+   border-radius: 0 0 4px 4px
+}
+.result tbody {
+   width: 100%;
+   height: 100%;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between
+}
+.result tr {
+   width: 100%
+}
+.wpm-result {
+   display: inline-block;
+   padding-bottom: 20px;
+   position: relative
+}
+.wpm-result::after {
+   content: '(words per minute)';
+   position: absolute;
+   bottom: 9px;
+   left: 50%;
+   transform: translateX(-50%);
+   font-size: 12px;
+   color: #81888c
+}
+.wpm-result td {
+   color: #3FAF76;
+   font-weight: 700;
+   font-size: 45px;
+   display: inline-block;
+   width: 100%;
+   text-align: center
+}
+.result tr:not(:first-of-type) {
+   display: flex;
+   justify-content: space-between;
+   position: relative;
+   padding: 15px 0
+}
+.result tr:not(:first-of-type) td:first-of-type {
+   font-weight: 400
+}
+.result tr:not(:first-of-type) td:last-of-type {
+   font-weight: 500
+}
+.result tr:not(:last-of-type) {
+   border-bottom: 1px solid #DDDDDD
+}
+.result tr:last-of-type td {
+   width: 100%;
+   text-align: center
+}
+.try-again {
+   width: 70%;
+   background-color: #2b5466;
+   color: #fff;
+   font-size: 16px;
+   font-weight: 600;
+   border: none;
+   padding: 10px;
+   cursor: pointer
+}
+.correct-characters {
+   color: #3FAF76
+}
+.wrong-characters {
+   color: red;
+}
+.result-show {
+   z-index: 2;
+   opacity: 1
+}
