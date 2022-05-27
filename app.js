@@ -108,9 +108,11 @@ function checkInput(e, currentCharacter, preCharacter, inputVal) {
       }
    }
    else if (preCharacter.innerText === inputVal) {
+      correctAudio.play();
       preCharacter.classList.add('correct');
    } 
    else {
+      wrongAudio.play();
       preCharacter.classList.add('mistake')
    }
 }
