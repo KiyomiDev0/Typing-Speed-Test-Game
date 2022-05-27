@@ -117,6 +117,10 @@ body {
    background-color: #172c3482;
    opacity: 1
 }
+.input {
+   position: absolute;
+   opacity: 0
+}
 ul {
    position: fixed;
    bottom: 25px;
