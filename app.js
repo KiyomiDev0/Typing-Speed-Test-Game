@@ -10,7 +10,8 @@ let randomParagraph = 'https://api.quotable.io/random?minLength=200',
     wrongAudio = new Audio('audios/wrong.mp3'),
     audioControl = document.querySelector('.volume'),
     mistakesEl = document.querySelector('.mistakes span'),
-    mistakesCount = 0
+    mistakesCount = 0,
+    wpm = document.querySelector('.wpm span')
 
 showNewParagraph();
 body.onclick = () => input.focus();
@@ -50,8 +51,11 @@ input.addEventListener('input', (e) => {
    runTimer();
    checkInput(e, currentCharacter, preCharacter, input.value[inputLength - 1]);
    activateCurrentWord(words, characters);
-   
+
    mistakesEl.innerText = mistakesCount;
+   // update WPM
+   wpmCount = Math.round(inputLength / 5 - mistakesCount) ;
+   wpmCount > 0 ? wpm.innerText = `${wpmCount}` : wpm.innerText='0';
 })
 
 function getRandomParagraph() {
