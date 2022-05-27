@@ -13,14 +13,18 @@ input.addEventListener('input', (e) => {
    let words = Array.from(document.querySelectorAll('.paragraph-container div')),
        characters = Array.from(document.querySelectorAll('.paragraph-container span')),
        inputLength = input.value.length,
-       currentCharacter = characters[inputLength]
+       currentCharacter = characters[inputLength],
+       preCharacter;
 
    characters.forEach(span => span.classList.remove('active'));
    if(inputLength < characters.length) {
       currentCharacter.classList.add('active');
    };
-   
+
+   inputLength > 0 ? preCharacter = characters[inputLength - 1] : preCharacter = characters[0];
+
    runTimer();
+   checkInput(e, currentCharacter, preCharacter, input.value[inputLength - 1]);
    activateCurrentWord(words, characters);
 })
 
@@ -89,4 +93,21 @@ function activateCurrentWord(words, characters) {
          spanParent.classList.add('word-active')
       }
    })
+}
+
+function checkInput(e, currentCharacter, preCharacter, inputVal) {
+   if (e.inputType == 'deleteContentBackward') {
+      if (currentCharacter.classList.contains('mistake')) {
+         currentCharacter.classList.remove('mistake')
+      }
+      else if (currentCharacter.classList.contains('correct')) {
+         currentCharacter.classList.remove('correct');
+      }
+   }
+   else if (preCharacter.innerText === inputVal) {
+      preCharacter.classList.add('correct');
+   } 
+   else {
+      preCharacter.classList.add('mistake')
+   }
 }

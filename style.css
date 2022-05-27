@@ -196,3 +196,28 @@ li:not(:last-of-type)::after {
 .wpm, .cpm {
    color: #65efa8
 }
+.correct {
+   color: #55ffaa;
+   position: relative
+}
+.correct::after {
+   background-color: #47c5934a
+}
+.mistake {
+   color: red;
+   position: relative
+}
+.mistake::after {
+   background-color: rgb(255 40 40 / 30%)
+}
+.correct::after,
+.mistake::after {
+   content: '';
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   height: 105%;
+   width: 105%;
+   border-radius: 3px
+}
