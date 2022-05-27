@@ -42,3 +42,131 @@ body {
    cursor: pointer;
    z-index: 1
 }
+.container {
+   width: 800px;
+   max-width: 90%;
+   height: 460px;
+   padding: 25px;
+   margin: 0 auto;
+   border-radius: 10px;
+   background: rgba(255, 255, 255, 0.11);
+   border-radius: 14px;
+   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+   backdrop-filter: blur(5.3px);
+   -webkit-backdrop-filter: blur(5.3px);
+   border: 1px solid rgba(255, 255, 255, 0.25);
+   position: relative;
+   z-index: 1
+}
+@media (max-width: 450px) {
+   .container {
+      padding: 15px
+   }
+}
+.game-block {
+   height: 93%;
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+   border: 1px solid rgb(159, 159, 159);
+   border-bottom: 0;
+   padding: 20px 25px;
+   border-radius: inherit;
+   border-bottom-left-radius: 0;
+   border-bottom-right-radius: 0;
+   overflow: hidden
+}
+@media (max-width: 450px) {
+   .game-block {
+      padding: 15px;
+   }
+}
+.paragraph-container {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 9px 12px;
+   color: rgb(255, 255, 255);
+   font-weight: 500;
+   font-size: 1.5em;
+   line-height: 2;
+   letter-spacing: 2px;
+   position: relative;
+   top: 0
+}
+@media (max-width: 676px) {
+   .paragraph-container {
+      font-size: 1.2em
+   }
+}
+@media (max-width: 450px) {
+   .paragraph-container {
+      font-size: 1em
+   }
+}
+.paragraph-container div {
+   display: flex;
+   gap: 0 3px;
+   position: relative
+}
+.paragraph-container .word-active::before {
+   content: '';
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   z-index: -1;
+   background-color: #172c3482;
+   opacity: 1
+}
+ul {
+   position: fixed;
+   bottom: 25px;
+   width: calc(100% - 50px);
+   height: 50px;
+   left: 50%;
+   transform: translateX(-50%);
+   list-style: none;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 0 40px;
+   border: 1px solid rgb(159, 159, 159);
+   border-radius: 14px;
+   border-top-left-radius: 0;
+   border-top-right-radius: 0;
+   background-color: #203A43
+}
+@media (max-width: 450px) {
+   ul {
+      bottom: 15px;
+      width: calc(100% - 30px);
+      gap: 0 12px
+   }
+}
+li {
+   font-weight: 500;
+   position: relative
+}
+@media (max-width: 450px) {
+   li {
+      font-size: 11px
+   }
+}
+li:not(:last-of-type)::after {
+   content: '';
+   position: absolute;
+   height: 100%;
+   right: -20px;
+   width: 1px;
+   background-color: rgb(159, 159, 159)
+}
+@media (max-width: 450px) {
+   li:not(:last-of-type)::after {
+      right: -6px
+   }
+}
+.mistakes {
+   color: rgb(255, 151, 151)
+}
+.wpm, .cpm {
+   color: #65efa8
+}
