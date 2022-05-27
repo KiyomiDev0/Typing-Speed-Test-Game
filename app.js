@@ -1,5 +1,5 @@
 let randomParagraph = 'https://api.quotable.io/random?minLength=200',
-    sec = maxTime = 60,
+    sec = maxTime = 5,
     pTop = firstKeystroke = barWidth = 0,
     timerBar = document.querySelector('.timer-bar'),
     timer = document.querySelector('.timer span'),
@@ -10,14 +10,23 @@ let randomParagraph = 'https://api.quotable.io/random?minLength=200',
     wrongAudio = new Audio('audios/wrong.mp3'),
     audioControl = document.querySelector('.volume'),
     mistakesEl = document.querySelector('.mistakes span'),
-    correctInputs = mistakesCount = 0,
+    correctInputs = mistakesCount = wpmCount = keystrokes = 0,
     wpm = document.querySelector('.wpm span'),
-    cpm = document.querySelector('.cpm span')
+    cpm = document.querySelector('.cpm span'),
+    resultContainer = document.querySelector('.result-container'),
+    result = document.querySelector('.result'),
+    wpmResult = document.querySelector('.wpm-result td'),
+    keystrokesEl = document.querySelector('.keystrokes'),
+    correctCharacters = document.querySelector('.correct-characters'),
+    wrongCharacters = document.querySelector('.wrong-characters'),
+    accuracy = document.querySelector('.accuracy'),
+    tryAgain = document.querySelector('.try-again');
 
 showNewParagraph();
 body.onclick = () => input.focus();
 
 input.addEventListener('input', (e) => {
+   keystrokes += 1;
    let words = Array.from(document.querySelectorAll('.paragraph-container div')),
        characters = Array.from(document.querySelectorAll('.paragraph-container span')),
        inputLength = input.value.length,
@@ -99,6 +108,7 @@ function timerBarFn(){
 function timerFn(){
    function updateTime(){
       timer.innerText = `${sec}s`;
+      if (sec == 0) showResult();
       if (sec == 5) timer.classList.add('blink');
       sec--;
       sec < 0 ? clearInterval(timerFn) : 0;
@@ -162,3 +172,12 @@ audioControl.addEventListener('click', () => {
    correctAudio.muted ? audioControl.innerHTML = '<span class="icon-volume-mute2"></span>' 
    : audioControl.innerHTML = '<span class="icon-volume-high"></span>';
 })
+
+function showResult() {
+   wpmCount > 0 ? wpmResult.innerText = `${wpmCount} WPM` : wpmResult.innerText = '0 WPM';
+   keystrokesEl.innerText = keystrokes;
+   correctCharacters.innerText = correctInputs;
+   wrongCharacters.innerText = mistakesCount;
+   accuracy.innerText = `${(correctInputs / keystrokes * 100).toFixed(1)}%`;
+   resultContainer.classList.add('result-show');
+}
