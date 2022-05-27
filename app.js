@@ -1,8 +1,9 @@
 let randomParagraph = 'https://api.quotable.io/random?minLength=200',
     sec = maxTime = 60,
-    firstKeystroke = barWidth = 0,
+    pTop = firstKeystroke = barWidth = 0,
     timerBar = document.querySelector('.timer-bar'),
     timer = document.querySelector('.timer span'),
+    gameBlockBottom = document.querySelector('.game-block').getBoundingClientRect().bottom,
     pContainer = document.querySelector('.paragraph-container'),
     input = document.querySelector('.input'),
     correctAudio = new Audio('audios/input.mp3'),
@@ -17,16 +18,32 @@ input.addEventListener('input', (e) => {
        characters = Array.from(document.querySelectorAll('.paragraph-container span')),
        inputLength = input.value.length,
        currentCharacter = characters[inputLength],
+       currentCharacterLeft,
        preCharacter;
 
    characters.forEach(span => span.classList.remove('active'));
    if(inputLength < characters.length) {
       currentCharacter.classList.add('active');
+      currentCharacterLeft = document.querySelector('.active').getBoundingClientRect().left;
    };
 
    input.setAttribute('maxlength', characters.length)
-   
+
    inputLength > 0 ? preCharacter = characters[inputLength - 1] : preCharacter = characters[0];
+
+   if (e.inputType == 'deleteContentBackward') {
+      if (pTop <= -60.19) {
+         if (inputLength != characters.length - 1) {
+            if (currentCharacterLeft - characters[inputLength + 1].getBoundingClientRect().left > 40 ) {
+               pTop = pTop + 60.19;
+               pContainer.style.top = `${pTop}px`;
+            }
+         }
+      }
+   }
+   else if (gameBlockBottom - characters[characters.length - 1].getBoundingClientRect().bottom < 12) {
+      detectNewLine(preCharacter, currentCharacterLeft);
+   }
 
    runTimer();
    checkInput(e, currentCharacter, preCharacter, input.value[inputLength - 1]);
@@ -116,6 +133,14 @@ function checkInput(e, currentCharacter, preCharacter, inputVal) {
    else {
       wrongAudio.play();
       preCharacter.classList.add('mistake')
+   }
+}
+
+function detectNewLine(preCharacter, currentCharacterLeft) {
+   let preCharacterLeft = preCharacter.getBoundingClientRect().left;
+   if (currentCharacterLeft - preCharacterLeft < 0) {
+      pTop = pTop - 60.19;
+      pContainer.style.top = `${pTop}px`;
    }
 }
 
