@@ -24,6 +24,8 @@ input.addEventListener('input', (e) => {
       currentCharacter.classList.add('active');
    };
 
+   input.setAttribute('maxlength', characters.length)
+   
    inputLength > 0 ? preCharacter = characters[inputLength - 1] : preCharacter = characters[0];
 
    runTimer();
