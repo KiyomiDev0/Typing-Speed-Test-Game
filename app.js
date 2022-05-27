@@ -1,5 +1,5 @@
 let randomParagraph = 'https://api.quotable.io/random?minLength=200',
-    sec = maxTime = 5,
+    sec = maxTime = 60,
     pTop = firstKeystroke = barWidth = 0,
     timerBar = document.querySelector('.timer-bar'),
     timer = document.querySelector('.timer span'),
@@ -185,3 +185,17 @@ function showResult() {
 function takeshot() {
    html2canvas(result).then(canvas => window.open().document.write('<img src="' + canvas.toDataURL() + '" />'))
 }
+
+function resetGame() {
+   resultContainer.classList.remove('result-show');
+   showNewParagraph();
+   sec = maxTime;
+   timer.innerText = `${maxTime}s`;
+   input.value = '';
+   input.readOnly = false;
+   mistakesCount = wpmCount = correctInputs = keystrokes = firstKeystroke = barWidth = 0;
+   mistakesEl.innerText = wpm.innerText = cpm.innerText = timerBar.style.width = pTop = '0';
+   pContainer.style.top = `${pTop}px`;
+   timer.classList.remove('blink');
+}
+tryAgain.addEventListener('click', () => resetGame());
