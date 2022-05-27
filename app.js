@@ -11,8 +11,15 @@ body.onclick = () => input.focus();
 
 input.addEventListener('input', (e) => {
    let words = Array.from(document.querySelectorAll('.paragraph-container div')),
-       characters = Array.from(document.querySelectorAll('.paragraph-container span'))
+       characters = Array.from(document.querySelectorAll('.paragraph-container span')),
+       inputLength = input.value.length,
+       currentCharacter = characters[inputLength]
 
+   characters.forEach(span => span.classList.remove('active'));
+   if(inputLength < characters.length) {
+      currentCharacter.classList.add('active');
+   };
+   
    runTimer();
    activateCurrentWord(words, characters);
 })
