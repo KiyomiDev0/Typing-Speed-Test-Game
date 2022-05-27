@@ -10,7 +10,11 @@ showNewParagraph();
 body.onclick = () => input.focus();
 
 input.addEventListener('input', (e) => {
+   let words = Array.from(document.querySelectorAll('.paragraph-container div')),
+       characters = Array.from(document.querySelectorAll('.paragraph-container span'))
+
    runTimer();
+   activateCurrentWord(words, characters);
 })
 
 function getRandomParagraph() {
@@ -68,4 +72,14 @@ function runTimer(){
       timerFn();
       timerBarFn();
    }
+}
+
+function activateCurrentWord(words, characters) {
+   characters.forEach(span => {
+      if ((span.classList.contains('active'))) {
+         let spanParent = span.parentElement;
+         words.forEach(word => word.classList.remove('word-active'));
+         spanParent.classList.add('word-active')
+      }
+   })
 }
