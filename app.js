@@ -8,7 +8,9 @@ let randomParagraph = 'https://api.quotable.io/random?minLength=200',
     input = document.querySelector('.input'),
     correctAudio = new Audio('audios/input.mp3'),
     wrongAudio = new Audio('audios/wrong.mp3'),
-    audioControl = document.querySelector('.volume')
+    audioControl = document.querySelector('.volume'),
+    mistakesEl = document.querySelector('.mistakes span'),
+    mistakesCount = 0
 
 showNewParagraph();
 body.onclick = () => input.focus();
@@ -48,6 +50,8 @@ input.addEventListener('input', (e) => {
    runTimer();
    checkInput(e, currentCharacter, preCharacter, input.value[inputLength - 1]);
    activateCurrentWord(words, characters);
+   
+   mistakesEl.innerText = mistakesCount;
 })
 
 function getRandomParagraph() {
@@ -121,6 +125,7 @@ function checkInput(e, currentCharacter, preCharacter, inputVal) {
    if (e.inputType == 'deleteContentBackward') {
       if (currentCharacter.classList.contains('mistake')) {
          currentCharacter.classList.remove('mistake')
+         mistakesCount -= 1;
       }
       else if (currentCharacter.classList.contains('correct')) {
          currentCharacter.classList.remove('correct');
@@ -133,6 +138,7 @@ function checkInput(e, currentCharacter, preCharacter, inputVal) {
    else {
       wrongAudio.play();
       preCharacter.classList.add('mistake')
+      mistakesCount += 1;
    }
 }
 
