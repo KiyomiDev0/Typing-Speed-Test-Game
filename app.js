@@ -1,6 +1,6 @@
 let randomParagraph = 'https://api.quotable.io/random?minLength=200',
     sec = maxTime = 60,
-    barWidth = 0,
+    firstKeystroke = barWidth = 0,
     timerBar = document.querySelector('.timer-bar'),
     timer = document.querySelector('.timer span'),
     pContainer = document.querySelector('.paragraph-container'),
@@ -8,6 +8,10 @@ let randomParagraph = 'https://api.quotable.io/random?minLength=200',
     
 showNewParagraph();
 body.onclick = () => input.focus();
+
+input.addEventListener('input', (e) => {
+   runTimer();
+})
 
 function getRandomParagraph() {
    return fetch(randomParagraph)
@@ -51,4 +55,12 @@ function timerFn(){
   }
    updateTime();
    let timerFn = setInterval(updateTime, 1000);
+}
+// run timer on first keystroke only
+function runTimer(){
+   firstKeystroke += 1;
+   if(firstKeystroke == 1) {
+      timerFn();
+      timerBarFn();
+   }
 }
