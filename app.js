@@ -10,8 +10,9 @@ let randomParagraph = 'https://api.quotable.io/random?minLength=200',
     wrongAudio = new Audio('audios/wrong.mp3'),
     audioControl = document.querySelector('.volume'),
     mistakesEl = document.querySelector('.mistakes span'),
-    mistakesCount = 0,
-    wpm = document.querySelector('.wpm span')
+    correctInputs = mistakesCount = 0,
+    wpm = document.querySelector('.wpm span'),
+    cpm = document.querySelector('.cpm span')
 
 showNewParagraph();
 body.onclick = () => input.focus();
@@ -133,11 +134,13 @@ function checkInput(e, currentCharacter, preCharacter, inputVal) {
       }
       else if (currentCharacter.classList.contains('correct')) {
          currentCharacter.classList.remove('correct');
+         cpm.innerText = correctInputs -= 1;
       }
    }
    else if (preCharacter.innerText === inputVal) {
       correctAudio.play();
       preCharacter.classList.add('correct');
+      cpm.innerText = correctInputs += 1;
    } 
    else {
       wrongAudio.play();
