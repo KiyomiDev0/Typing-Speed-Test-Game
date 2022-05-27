@@ -4,7 +4,10 @@ let randomParagraph = 'https://api.quotable.io/random?minLength=200',
     timerBar = document.querySelector('.timer-bar'),
     timer = document.querySelector('.timer span'),
     pContainer = document.querySelector('.paragraph-container'),
-    input = document.querySelector('.input')
+    input = document.querySelector('.input'),
+    correctAudio = new Audio('audios/input.mp3'),
+    wrongAudio = new Audio('audios/wrong.mp3'),
+    audioControl = document.querySelector('.volume')
 
 showNewParagraph();
 body.onclick = () => input.focus();
@@ -111,3 +114,9 @@ function checkInput(e, currentCharacter, preCharacter, inputVal) {
       preCharacter.classList.add('mistake')
    }
 }
+
+audioControl.addEventListener('click', () => {
+   correctAudio.muted = wrongAudio.muted = !correctAudio.muted;
+   correctAudio.muted ? audioControl.innerHTML = '<span class="icon-volume-mute2"></span>' 
+   : audioControl.innerHTML = '<span class="icon-volume-high"></span>';
+})
