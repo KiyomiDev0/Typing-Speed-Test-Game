@@ -1,7 +1,9 @@
 let randomParagraph = 'https://api.quotable.io/random?minLength=200',
-    pContainer = document.querySelector('.paragraph-container')
+    pContainer = document.querySelector('.paragraph-container'),
+    input = document.querySelector('.input')
 
 showNewParagraph();
+body.onclick = () => input.focus();
 
 function getRandomParagraph() {
    return fetch(randomParagraph)
