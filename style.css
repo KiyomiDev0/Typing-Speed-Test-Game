@@ -38,6 +38,14 @@ body {
 .timer span {
    color: #5fffb0;
 }
+.timer .blink {
+   color: red;
+   animation: blinking 5 ease-in-out 1s
+}
+@keyframes blinking {
+   from {opacity: 0.5}
+   to {opacity: 1}
+}
 .volume {
    cursor: pointer;
    z-index: 1

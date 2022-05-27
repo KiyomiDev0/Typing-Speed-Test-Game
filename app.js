@@ -1,7 +1,8 @@
 let randomParagraph = 'https://api.quotable.io/random?minLength=200',
-    maxTime = 60,
+    sec = maxTime = 60,
     barWidth = 0,
     timerBar = document.querySelector('.timer-bar'),
+    timer = document.querySelector('.timer span'),
     pContainer = document.querySelector('.paragraph-container'),
     input = document.querySelector('.input')
     
@@ -39,4 +40,15 @@ function timerBarFn(){
    updateBarWidth()
    let timerBarFn = setInterval(updateBarWidth, 1000);
 }
-timerBarFn()
+
+function timerFn(){
+   function updateTime(){
+      timer.innerText = `${sec}s`;
+      if (sec == 5) timer.classList.add('blink');
+      sec--;
+      sec < 0 ? clearInterval(timerFn) : 0;
+      if (timer.innerText == '0s') input.readOnly = true;
+  }
+   updateTime();
+   let timerFn = setInterval(updateTime, 1000);
+}
