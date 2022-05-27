@@ -181,3 +181,7 @@ function showResult() {
    accuracy.innerText = `${(correctInputs / keystrokes * 100).toFixed(1)}%`;
    resultContainer.classList.add('result-show');
 }
+
+function takeshot() {
+   html2canvas(result).then(canvas => window.open().document.write('<img src="' + canvas.toDataURL() + '" />'))
+}
