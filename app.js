@@ -5,7 +5,7 @@ let randomParagraph = 'https://api.quotable.io/random?minLength=200',
     timer = document.querySelector('.timer span'),
     pContainer = document.querySelector('.paragraph-container'),
     input = document.querySelector('.input')
-    
+
 showNewParagraph();
 body.onclick = () => input.focus();
 
@@ -32,6 +32,11 @@ async function showNewParagraph() {
       })
       pContainer.appendChild(wordContainer);
    })
+   function activeFirstCharacter() {
+      let firstCharacter = document.querySelector(".paragraph-container span");
+      firstCharacter.classList.add('active');
+   }
+   activeFirstCharacter();
 }
 
 function timerBarFn(){

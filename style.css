@@ -125,6 +125,15 @@ body {
    background-color: #172c3482;
    opacity: 1
 }
+span.active {
+   color: #fcff2f;
+   border-bottom: 2px solid;
+   animation: blink 1s ease-in-out infinite
+}
+@keyframes blink {
+   from {border-bottom-color: transparent}
+   to {border-bottom-color: #fcff2f}
+}
 .input {
    position: absolute;
    opacity: 0
